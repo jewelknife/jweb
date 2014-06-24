@@ -2,6 +2,7 @@
 /**
  * Module dependencies.
  */
+var webot = require('weixin-robot');
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
@@ -9,6 +10,7 @@ var path = require('path');
 var MongoStore = require('connect-mongo')(express);
 var settings = require('./settings');
 var flash = require('connect-flash');
+var wx = require('./routes/wx');
 
 var app = express();
 
@@ -56,7 +58,11 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-routes(app);
+wx(webot);
+
+webot.watch(app, { token: 'jewelknife', path: '/wxapi' });
+
+routes(app, webot);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

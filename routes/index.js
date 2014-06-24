@@ -5,7 +5,7 @@ var crypto = require('crypto')
  * GET home page.
  */
 
-module.exports = function(app){
+module.exports = function(app, webot){
 
     app.get('/', checkLogin);
     app.get('/', function(req, res) {
