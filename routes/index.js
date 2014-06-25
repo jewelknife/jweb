@@ -93,6 +93,7 @@ module.exports = function(app, webot){
     app.post('/reg', checkNotLogin);
     app.post('/reg', function(req, res) {
         var username = req.body.username,
+//            accountName = req.body.accountName,
             password = req.body.password,
             password_re = req.body['rpassword'];
         //检验用户两次输入的密码是否一致
@@ -108,6 +109,10 @@ module.exports = function(app, webot){
             password: password,
             email: req.body.email
         });
+//        var newAccount = new Account({
+//            name : accountName,
+//            users: [newUser]
+//        });
         //检查用户名是否已经存在
         User.get(newUser.username, function(err, user) {
             if (user) {
