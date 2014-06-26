@@ -18,9 +18,23 @@ var Menus = function() {
         "hideMethod": "fadeOut"
     };
 
+    if(typeof String.prototype.getBytesLength == 'undefined') {
+        String.prototype.getBytesLength = function() {
+            var len = 0;
+            if (this) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i].match(/[^\x00-\xff]/ig) != null) //全角
+                        len += 2;
+                    else
+                        len += 1;
+                }
+            }
+            return len;
+        }
+    }
+
     function check_data(result) {
         var bak = JSON.parse(result);
-        alert(bak.length);
         if (bak.length > 3) {
             toastr.warning('一级菜单最多三个!请检查后重新提交');
             return;
@@ -112,8 +126,6 @@ var Menus = function() {
             result.push(top);
 
         });
-          result = result.join(',');
-          result = '[' + result + ']';
         return JSON.stringify(result);
     }
 
