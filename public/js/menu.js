@@ -20,6 +20,7 @@ var Menus = function() {
 
     function check_data(result) {
         var bak = JSON.parse(result);
+        alert(bak.length);
         if (bak.length > 3) {
             toastr.warning('一级菜单最多三个!请检查后重新提交');
             return;
@@ -109,11 +110,147 @@ var Menus = function() {
             };
             var topmStr = '{' + '"name":"' + topm['name'] + '","model":"' + pcontainer.attr('data-model') + '","message":"' + pcontainer.attr('data-message') + '","key":"' + topm['key'] + '","sub_button":' + topm['sub_button'] + '}';
             result.push(top);
-        });
-        //  result = result.join(',');
-        //  result = '[' + result + ']';
 
+        });
+          result = result.join(',');
+          result = '[' + result + ']';
         return JSON.stringify(result);
+    }
+
+    function bindButton() {
+        $('.topm').each(function (Index, Element) {
+            $(Element).find('.btn').unbind('click');
+
+            $(Element).find('.up').bind('click', function () {
+
+
+                if (Index != 0) {
+
+                    var i = Index - 1;
+
+                    var n = $(Element).next();
+
+                    if (n.hasClass('subm')) {
+
+                        if (Index != $('.topm').length - 1) {
+                            var S = $(Element).nextUntil('.topm');
+                        } else {
+                            var S = $(Element).nextUntil('.btns');
+                        }
+                    }
+                    $(Element).insertBefore($('.topm:eq(' + i + ')'));
+
+                    if (n.hasClass('subm')) {
+                        S.insertAfter($(Element));
+                    }
+
+                    bindButton();
+                }
+            });
+
+            $(Element).find('.down').bind('click', function () {
+                if (Index != $('.topm').length - 1) {
+                    var i = Index + 1;
+
+                    var n = $(Element).next();
+
+                    if (n.hasClass('subm')) {
+
+                        if (Index != $('.topm').length - 1) {
+                            var S = $(Element).nextUntil('.topm');
+                        } else {
+                            var S = $(Element).nextUntil('.btns');
+                        }
+                    }
+                    $(Element).insertAfter($('.topm:eq(' + i + ')'));
+
+                    if (n.hasClass('subm')) {
+                        S.insertAfter($(Element));
+                    }
+
+                    bindButton();
+                }
+            });
+
+            $(Element).find('.delBtn').bind('click', function () {
+
+                var c = confirm('是否确认删除按钮');
+
+                if (c == true) {
+                    $(Element).fadeOut(function () {
+                        var n = $(Element).next();
+
+                        if (n.hasClass('subm')) {
+                            if (Index != $('.topm').length - 1) {
+                                var S = $(Element).nextUntil('.topm');
+                            } else {
+                                var S = $(Element).nextUntil('.btns');
+                            }
+                            S.remove();
+                        }
+                        $(Element).remove();
+                        bindButton();
+                    });
+                }
+            });
+
+            $(Element).find('.addSubBtn').bind('click', function () {
+
+                if (!check_data(get_data())) {
+                    return;
+                }
+                var l = $(Element).clone();
+                l.find('input').val('');
+                l.addClass('subm').removeClass('topm');
+                l.find('.col-md-5').removeClass('col-md-5').addClass('col-md-offset-1').addClass('col-md-4');
+//                $('<div class="span2 m-wrap"></div>').insertBefore(l.find('input:first'));
+                l.find('.addSubBtn').remove();
+                l.find('input').val('');
+                l.insertAfter($(Element));
+
+                bindButton();
+            });
+        });
+
+        $('.subm').each(function (Index, Element) {
+            $(Element).find('.btn').unbind('click');
+
+            $(Element).find('.up').bind('click', function () {
+
+                var P = $(Element).prev();
+
+                if (P.hasClass('subm')) {
+                    var i = Index - 1;
+
+                    $(Element).insertBefore($('.subm:eq(' + i + ')'));
+
+                    bindButton();
+                }
+            });
+
+            $(Element).find('.down').bind('click', function () {
+
+                var N = $(Element).next();
+
+                if (N.hasClass('subm')) {
+                    var i = Index + 1;
+                    $(Element).insertAfter($('.subm:eq(' + i + ')'));
+                    bindButton();
+                }
+            });
+
+            $(Element).find('.delBtn').bind('click', function () {
+
+                var c = confirm('是否确认删除按钮');
+
+                if (c == true) {
+                    $(Element).fadeOut(function () {
+                        $(Element).remove();
+                        bindButton();
+                    });
+                }
+            });
+        });
     }
 
     var bindAddTopMenu = function () {
@@ -128,8 +265,7 @@ var Menus = function() {
                 var l = $('.topm:first').clone();
                 l.find('input').val('');
                 l.insertBefore('.form-actions');
-//            bindButton();
-
+                bindButton();
             });
         }
     };
@@ -138,6 +274,7 @@ var Menus = function() {
 
         initEditMenus: function() {
             bindAddTopMenu();
+            bindButton();
         }
 
     };
