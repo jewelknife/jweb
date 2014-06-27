@@ -6,12 +6,12 @@ var PageMenu = function() {
     function selectMenu() {
         var pagehref = location.pathname.split('/');
 
-        var menuContainer = jQuery('.page-sidebar ul');
+//        var menuContainer = jQuery('.page-sidebar ul');
 //        var pageContent = $('.page-content');
 //        var pageContentBody = $('.page-content .page-content-body');
 
-        menuContainer.children('li.active').removeClass('active');
-        menuContainer.children('arrow.open').removeClass('open');
+//        menuContainer.children('li.active').removeClass('active');
+//        menuContainer.children('arrow.open').removeClass('open');
 
         for (var i = 0;i<pagehref.length;i++) {
             var selected = $("a[href*='"+ pagehref[i] +"']");
@@ -19,7 +19,7 @@ var PageMenu = function() {
 
                 $(selected).parents('li').each(function () {
                     $(this).addClass('active');
-                    $(this).children('a > span.arrow').addClass('open');
+                    $(this).find('a:first > span.arrow').addClass('open');
                 });
                 $(selected).parents('li').addClass('active');
 

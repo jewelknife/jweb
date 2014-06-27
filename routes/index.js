@@ -7,8 +7,12 @@ var crypto = require('crypto')
 
 module.exports = function(app, webot){
 
-    app.get('/', checkLogin);
     app.get('/', function(req, res) {
+        res.redirect('/index');
+    });
+
+    app.get('/index', checkLogin);
+    app.get('/index', function(req, res) {
         res.render('index', {
             title: 'wxweb',
             user: req.session.user,
@@ -35,6 +39,11 @@ module.exports = function(app, webot){
             success: req.flash('success').toString(),
             error: req.flash('error').toString()
         });
+    });
+
+    app.post('/new_rule', checkLogin);
+    app.post('/new_rule', function(req, res) {
+        res.redirect('/new_rule');
     });
 
     app.get('/edit_menus', checkLogin);
