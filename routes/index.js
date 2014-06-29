@@ -23,8 +23,40 @@ module.exports = function(app, webot){
 
     app.get('/rules', checkLogin);
     app.get('/rules', function(req, res) {
+        var rules = [
+            {
+                "pattern": /^hi\s*(\d*)$/,
+                "keyword": "hi",
+                "content":"hi, welcome to use this",
+                "msg_type": 0,
+                "status": 0,
+                "k_type":1,
+                "time": '2014-05-02'
+            },
+            {
+                "pattern": /^game\s*(\d*)$/,
+                "keyword": "game",
+                "content": {},
+                "msg_type": 1,
+                "status": 0,
+                "k_type":0,
+                "time": '2014-6-02'
+            },
+            {
+                "pattern": /^chose\s*(\d*)$/,
+                "keyword": "chose",
+                "content":"so happy today",
+                "msg_type": 0,
+                "status": 0,
+                "k_type":1,
+                "time": '2014-03-12'
+            }
+
+        ];
+
         res.render('rules', {
             title: '规则列表',
+            rules: rules,
             user: req.session.user,
             success: req.flash('success').toString(),
             error: req.flash('error').toString()
@@ -43,7 +75,7 @@ module.exports = function(app, webot){
 
     app.post('/new_rule', checkLogin);
     app.post('/new_rule', function(req, res) {
-        res.redirect('/new_rule');
+        res.redirect('/rules');
     });
 
     app.get('/edit_menus', checkLogin);

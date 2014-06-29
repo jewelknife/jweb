@@ -23,60 +23,134 @@
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="row">
     <div class="col-md-12">
-        <div class="note note-success">
-            <p>
-                There are many ways to get your data into DataTables, and if you are working with seriously large databases, you might want to consider using the server-side  options that DataTables provides. Basically all of the paging, filtering, sorting etc that DataTables does can be handed off to a server and DataTables is just an events and display module. The server side part of this example can be seen in <code>demo/table_ajax.php</code>.
-            </p>
-            <p>
-                To learn more please check out <a href="http://www.datatables.net/release-datatables/examples/data_sources/server_side.html" target="_blank">ajax datatable sample</a>.
-            </p>
-        </div>
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet box blue">
+        <div class="portlet box red">
             <div class="portlet-title">
-                <div class="caption"><i class="fa fa-edit"></i>Ajax Datatable</div>
+                <div class="caption"><i class="fa fa-globe"></i>规则列表</div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
-                    <a href="#portlet-config" data-toggle="modal" class="config"></a>
                     <a href="javascript:;" class="reload"></a>
-                    <a href="javascript:;" class="remove"></a>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="table-toolbar">
                     <div class="btn-group">
-                        <button id="sample_editable_1_new" class="btn green">
-                            Add New <i class="fa fa-plus"></i>
+                        <button id="sample_editable_1_new" onclick="javascript:location.href='/new_rule'"
+                                class="btn green">
+                            创建规则 <i class="fa fa-plus"></i>
                         </button>
-                    </div>
-                    <div class="btn-group pull-right">
-                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="#">Print</a></li>
-                            <li><a href="#">Save as PDF</a></li>
-                            <li><a href="#">Export to Excel</a></li>
-                        </ul>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover" id="sample_1">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Points</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div id="sample_1_length" class="dataTables_length"><label>
+                                    <select>
+                                        <option value="5" selected="selected">5</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="-1">All</option>
+                                    </select> records</label></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="dataTables_filter pull-right" id="sample_1_filter"><label>Search: <input type="text"
+                                                                                                      aria-controls="sample_1"
+                                                                                                      class="form-control input-medium"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-striped table-bordered table-hover dataTable" id="sample_1"
+                               aria-describedby="sample_1_info">
+                            <thead>
+                            <tr role="row">
+                                <th class=" sorting_disabled" role="columnheader" rowspan="1" colspan="1"
+                                    style="width: 20px; " aria-label="">
+                                    #
+                                </th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_1"
+                                    rowspan="1"
+                                    colspan="1" style="width: 282px; "
+                                    aria-label="keyword: activate to sort column ascending">
+                                    关键字
+                                </th>
+                                <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1"
+                                    style="width: 468px; "
+                                    aria-label="content">回复内容
+                                </th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_1"
+                                    rowspan="1"
+                                    colspan="1" style="width: 202px; "
+                                    aria-label="k_type: activate to sort column ascending">判断方式
+                                </th>
+                                <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1"
+                                    style="width: 251px; "
+                                    aria-label="status">状态
+                                </th>
+                                <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1"
+                                    style="width: 251px; "
+                                    aria-label="time">时间
+                                </th>
+                                <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1"
+                                    style="width: 265px; "
+                                    aria-label="&amp;nbsp;">操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            <% rules.forEach(function(rule, index){  %>
+                                <tr class="gradeX odd">
+                                    <td class="  sorting_1">
+                                        <%= index %>
+                                    </td>
+                                    <td class=" "><%= rule.keyword %></td>
+                                    <td class=" "><%= rule.content %></td>
+                                    <td class=" ">
+                                        <% if (rule.k_type == 0) { %>
+                                            等于
+                                        <% } else { %>
+                                            包含
+                                        <% } %>
+                                    </td>
+                                    <td class=" ">
+                                        <% if (rule.status == 0) { %>
+                                            开启
+                                        <% } else { %>
+                                            关闭
+                                        <% } %>
+                                    </td>
+                                    <td class="center"><%= rule.time %></td>
+                                    <td class=" "><span class="btn btn-info">编辑</span><span class="btn btn-danger">删除</span></td>
+                                </tr>
+                            <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12">
+                            <div class="dataTables_info" id="sample_1_info">Showing 1 to 25 of 25 entries</div>
+                        </div>
+                        <div class="col-md-7 col-sm-12">
+                            <div class="dataTables_paginate paging_bootstrap">
+                                <ul class="pagination" style=" ">
+                                    <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                    <li class="next "><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END EXAMPLE TABLE PORTLET-->
     </div>
+</div>
+<!-- END EXAMPLE TABLE PORTLET-->
+</div>
 </div>
 <!-- END PAGE CONTENT -->
 
