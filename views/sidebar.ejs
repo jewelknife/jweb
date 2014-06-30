@@ -1,105 +1,124 @@
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar navbar-collapse collapse">
-<!-- BEGIN SIDEBAR MENU -->
-<ul class="page-sidebar-menu">
-<li>
-    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-    <div class="sidebar-toggler hidden-phone"></div>
-    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-</li>
-<li>
-    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-    <form class="sidebar-search" action="extra_search.html" method="POST">
-        <div class="form-container">
-            <div class="input-box">
-                <a href="javascript:;" class="remove"></a>
-                <input type="text" placeholder="Search..."/>
-                <input type="button" class="submit" value=" "/>
-            </div>
-        </div>
-    </form>
-    <!-- END RESPONSIVE QUICK SEARCH FORM -->
-</li>
-<li class="start ">
-    <a href="/index">
-        <i class="fa fa-home"></i>
-        <span class="title">Dashboard</span>
-        <span class="selected"></span>
-    </a>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-user"></i>
-        <span class="title">自动回复</span>
-        <span class="arrow "></span>
-    </a>
-    <ul class="sub-menu">
+    <!-- BEGIN SIDEBAR MENU -->
+    <ul class="page-sidebar-menu">
         <li>
-            <a href="/rules">
-                规则列表</a>
+            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            <div class="sidebar-toggler hidden-phone"></div>
+            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
         </li>
         <li>
-            <a href="/new_rule">
-                创建规则</a>
+            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+            <form class="sidebar-search" action="extra_search.html" method="POST">
+                <div class="form-container">
+                    <div class="input-box">
+                        <a href="javascript:;" class="remove"></a>
+                        <input type="text" placeholder="Search..."/>
+                        <input type="button" class="submit" value=" "/>
+                    </div>
+                </div>
+            </form>
+            <!-- END RESPONSIVE QUICK SEARCH FORM -->
         </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-th"></i>
-        <span class="title">定制图文消息</span>
-        <span class="arrow"></span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a href="table_basic.html">
-                创建图文消息</a>
+        <li class="start ">
+            <a href="/index">
+                <i class="fa fa-home"></i>
+                <span class="title">首页</span>
+                <span class="selected"></span>
+            </a>
         </li>
-        <li>
-            <a href="table_responsive.html">
-                图文消息列表</a>
+        <li class="">
+            <a href="javascript:;">
+                <i class="fa fa-user"></i>
+                <span class="title">自动回复</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="/rules">
+                        规则列表</a>
+                </li>
+                <li>
+                    <a href="/new_rule">
+                        创建规则</a>
+                </li>
+            </ul>
         </li>
-        <li>
-            <a href="table_managed.html">
-                图文消息组合</a>
+        <li class="">
+            <a href="javascript:;">
+                <i class="fa fa-th"></i>
+                <span class="title">定制图文消息</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="/new_picmsg">
+                        创建图文消息</a>
+                </li>
+                <li>
+                    <a href="/picmsg_list">
+                        图文消息列表</a>
+                </li>
+                <!--<li>-->
+                <!--<a href="table_managed.html">-->
+                <!--图文消息组合</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<a href="table_editable.html">-->
+                <!--图文消息皮肤</a>-->
+                <!--</li>-->
+                <li class="disabled">
+                    <a href="#">
+                        图文消息数据</a>
+                </li>
+            </ul>
         </li>
-        <li>
-            <a href="table_editable.html">
-                图文消息皮肤</a>
+        <li class="">
+            <a href="javascript:;">
+                <i class="fa fa-file-text"></i>
+                <span class="title">自定义菜单</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="/edit_menus">
+                        自定义菜单设置</a>
+                </li>
+                <li>
+                    <a href="/menus_status" class="ajaxify">
+                        菜单点击统计</a>
+                </li>
+            </ul>
         </li>
-        <li>
-            <a href="table_advanced.html">
-                图文消息数据</a>
+        <li class="">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span class="title">微网站设置</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="#">
+                        功能建设中..</a>
+                </li>
+                <li>
+                    <a href="#">
+                        功能建设中..</a>
+                </li>
+            </ul>
         </li>
-    </ul>
-</li>
-<li class="" name="topli">
-    <a href="javascript:;" name="topli_a">
-        <i class="fa fa-file-text"></i>
-        <span class="title">自定义菜单</span>
-        <span class="arrow" name="topli_a_span"></span>
-    </a>
-    <ul class="sub-menu">
-        <li name="subli">
-            <a href="/edit_menus" name="subli_a">
-                自定义菜单设置</a>
-        </li>
-        <li>
-            <a href="/menus_status" class="ajaxify">
-                菜单点击统计</a>
-        </li>
-    </ul>
-</li>
 
-</ul>
-<!-- END SIDEBAR MENU -->
+
+    </ul>
+    <!-- END SIDEBAR MENU -->
 </div>
 <!-- END SIDEBAR -->
 
 <!-- BEGIN PAGE -->
 <div class="page-content">
     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-    <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

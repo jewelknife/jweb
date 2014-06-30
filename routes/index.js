@@ -78,6 +78,101 @@ module.exports = function(app, webot){
         res.redirect('/rules');
     });
 
+    app.get('/new_picmsg', checkLogin);
+    app.get('/new_picmsg', function(req, res) {
+        res.render('picture_msg_pm/new_picmsg', {
+            title: '创建图文消息',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+
+    app.post('/new_picmsg', checkLogin);
+    app.post('/new_picmsg', function(req, res) {
+        res.redirect('/picmsg_list');
+    });
+
+    app.get('/picmsg_list', checkLogin);
+    app.get('/picmsg_list', function(req, res) {
+        var picmsgs = [
+            {
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/2.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/3.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/4.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/5.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/6.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/7.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            },{
+                "title": 'Top footer ball game coming',
+                "description": "this is description",
+                "picurl":"/assets/img/blog/1.jpg",
+                "time": '2014-05-02'
+            }
+        ];
+
+        res.render('picture_msg_pm/picmsg_list', {
+            title: '图文消息列表',
+            picmsgs: picmsgs,
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+
     app.get('/edit_menus', checkLogin);
     app.get('/edit_menus', function(req, res) {
         res.render('edit_menus', {
