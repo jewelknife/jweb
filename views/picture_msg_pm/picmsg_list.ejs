@@ -1,0 +1,107 @@
+<%- include ../header %>
+<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            图文消息列表
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/">首页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/new_picmsg">定制图文消息</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li><a href="/new_picmsg">图文消息列表</a></li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN portlet box-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption"><i class="fa fa-globe"></i>图文消息列表</div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="reload"></a>
+                </div>
+            </div>
+            <!-- START PORTLET body-->
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="btn-group">
+                        <button id="sample_editable_1_new" onclick="javascript:location.href='/new_picmsg'"
+                                class="btn red">
+                            创建图文消息 <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <% picmsgs.forEach(function(picmsg, index){ %>
+
+                    <% if (index % 6 == 0 ) { %>
+                        <div class="row">
+                        <% } %>
+
+                        <div class="col-sm-4 col-md-2">
+                            <div class="thumbnail">
+                                <h3><%= picmsg.title %></h3>
+                                <img src="<%= picmsg.picurl %>" alt="100%x200"
+                                     style="width: 100%; height: 200px; display: block;"
+                                     data-src="holder.js/100%x200">
+
+                                <div class="caption">
+                                    <p><%= picmsg.description %></p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% if (index % 6 == 5) { %>
+                    </div>
+                    <% } %>
+
+                    <% }); %>
+
+                    <% if (picmsgs.length % 6 != 5) { %>
+                        </div>
+                    <% } %>
+                </div>
+            <p id="dynamic_pager_demo2">
+            <ul class="bootpag pagination pagination-sm">
+                <li data-lp="1" class="prev disabled"><a href="javascript:void(0);">
+                        <icon class="fa fa-angle-left"></icon>
+                    </a></li>
+                <li data-lp="1" class="disabled"><a href="javascript:void(0);">1</a></li>
+                <li data-lp="2"><a href="javascript:void(0);">2</a></li>
+                <li data-lp="3"><a href="javascript:void(0);">3</a></li>
+                <li data-lp="4"><a href="javascript:void(0);">4</a></li>
+                <li data-lp="5"><a href="javascript:void(0);">5</a></li>
+                <li data-lp="6"><a href="javascript:void(0);">6</a></li>
+                <li data-lp="7" class="next"><a href="javascript:void(0);">
+                        <icon class="fa fa-angle-right"></icon>
+                    </a></li>
+            </ul>
+            </p>
+            </div>
+
+
+
+        <!-- END PORTLET body-->
+
+    </div>
+    <!-- end portlet box PORTLET-->
+</div>
+</div>
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+<%- include ../footer %>

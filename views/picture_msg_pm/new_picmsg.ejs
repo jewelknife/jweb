@@ -1,0 +1,85 @@
+<%- include ../header %>
+<link rel="stylesheet" type="text/css" href="/assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css">
+<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            创建图文消息
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/">首页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">定制图文消息</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li><a href="#">创建图文消息</a></li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<div class="row">
+<div class="col-md-8 ">
+<!-- BEGIN SAMPLE FORM PORTLET-->
+<div class="portlet box green ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-reorder"></i> 创建图文消息
+        </div>
+        <div class="tools">
+            <a href="" class="collapse"></a>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+            <div class="form-body">
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">标题</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control"  name="title" placeholder="请输入标题..">
+                        <span class="help-block">标题长度请控制在10个字以内.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">描述</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control" name="discription" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">图文消息封面</label>
+                    <div class="col-md-9">
+                        <span class="btn green fileinput-button">
+                            <i class="fa fa-plus"></i>
+                            <span>上传</span>
+                            <input type="file" name="files[]" multiple="">
+						</span>
+                        尺寸建议720像素*400像素
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions fluid">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">创建规则</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- END SAMPLE FORM PORTLET-->
+</div>
+    </div>
+
+<!-- The basic File Upload plugin -->
+<script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+
+<%- include ../footer %>
