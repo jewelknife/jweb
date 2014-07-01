@@ -40,7 +40,7 @@ app.use(express.methodOverride());
 //  })
 //})
 //app.use(express.urlencoded({limit: '300mb'}));
-app.use(express.bodyParser({ keepExtensions: true, uploadDir: './public/temp', limit: '600mb'}));
+app.use(express.bodyParser({ keepExtensions: true, uploadDir: './public/temp', limit: '5mb'}));
 app.use(express.cookieParser());
 app.use(express.session({
     secret: settings.cookieSecret,

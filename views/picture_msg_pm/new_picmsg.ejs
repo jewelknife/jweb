@@ -25,6 +25,7 @@
 <!-- END PAGE HEADER-->
 <div class="row">
 <div class="col-md-8 ">
+
 <!-- BEGIN SAMPLE FORM PORTLET-->
 <div class="portlet box green ">
     <div class="portlet-title">
@@ -57,7 +58,10 @@
                         <span class="btn green fileinput-button">
                             <i class="fa fa-plus"></i>
                             <span>上传</span>
-                            <input type="file" name="files[]" multiple="">
+                            <input id="fileupload" type="file" name="files[]" multiple="">
+                            <div id="progress" style="height: 18px;">
+                                <div class="progress-bar progress-bar-info" style="width: 0%;"></div>
+                            </div>
 						</span>
                         尺寸建议720像素*400像素
                     </div>
@@ -74,12 +78,31 @@
 <!-- END SAMPLE FORM PORTLET-->
 </div>
     </div>
-
+<script src="/assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
 <script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
 <!-- The File Upload processing plugin -->
 <script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload validation plugin -->
 <script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+
+<script type="text/javascript">
+
+    $(function() {
+        $('#fileupload').fileupload({
+            /* ... */
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .bar').css(
+                        'width',
+                        progress + '%'
+                );
+            }
+        });
+    });
+
+</script>
 
 <%- include ../footer %>
