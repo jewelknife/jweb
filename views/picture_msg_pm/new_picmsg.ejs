@@ -24,60 +24,115 @@
 </div>
 <!-- END PAGE HEADER-->
 <div class="row">
-<div class="col-md-8 ">
+    <div class="col-md-8 ">
 
-<!-- BEGIN SAMPLE FORM PORTLET-->
-<div class="portlet box green ">
-    <div class="portlet-title">
-        <div class="caption">
-            <i class="fa fa-reorder"></i> 创建图文消息
-        </div>
-        <div class="tools">
-            <a href="" class="collapse"></a>
-        </div>
-    </div>
-    <div class="portlet-body form">
-        <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
-            <div class="form-body">
-                <div class="form-group">
-                    <label  class="col-md-3 control-label">标题</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control"  name="title" placeholder="请输入标题..">
-                        <span class="help-block">标题长度请控制在10个字以内.</span>
-                    </div>
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet box green ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-reorder"></i> 创建图文消息
                 </div>
-                <div class="form-group">
-                    <label  class="col-md-3 control-label">描述</label>
-                    <div class="col-md-9">
-                        <textarea class="form-control" name="discription" rows="3"></textarea>
-                    </div>
+                <div class="tools">
+                    <a href="" class="collapse"></a>
                 </div>
-                <div class="form-group">
-                    <label  class="col-md-3 control-label">图文消息封面</label>
-                    <div class="col-md-9">
+            </div>
+            <div class="portlet-body form">
+                <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">标题</label>
+
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="title" placeholder="请输入标题..">
+                                <span class="help-block">标题长度请控制在10个字以内.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">描述</label>
+
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="discription" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">图文消息封面</label>
+
+                            <div class="col-md-9">
                         <span class="btn green fileinput-button">
                             <i class="fa fa-plus"></i>
                             <span>上传</span>
                             <input id="fileupload" type="file" name="files[]" multiple="">
-                            <div id="progress" style="height: 18px;">
-                                <div class="progress-bar progress-bar-info" style="width: 0%;"></div>
-                            </div>
 						</span>
-                        尺寸建议720像素*400像素
+
+                                <div id="progress" style="height: 18px;">
+                                    <div class="progress-bar progress-bar-info" style="width: 0%;"></div>
+                                </div>
+                                尺寸建议720像素*400像素
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn green">创建规则</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+    <div class="col-md-4">
+        <style type="text/css">
+            .default-tip{
+                color: #c0c0c0;
+                line-height: 150px;
+                border: 1px solid #b2b8bd;
+                width: 100%;
+                text-align: center;
+                background-color:#b2b8bd ;
+                color:#FFF;
+
+            }
+            .msg-item-wrapper{
+                border-radius:5px !important;
+                border:1px solid #aaa;
+                box-shadow: 0px 0px 2px #AAA;
+                position: relative;
+            }
+        </style>
+        <!--<div class="note note-success" id="appmsg" style="">-->
+            <!--<div id="appmsgItem1" class="msg-item appmsgItem">-->
+                <!--<h4 class="msg-t"><div class="i-title" style="padding:10px;padding-bottom:0px;white-space: normal;text-overflow: ellipsis;height:1em;width:370px;max-width: 370px;overflow: hidden;">标题</div>-->
+                <!--</h4>-->
+                <!--<div class="cover" style="max-height:190px;overflow: hidden;">-->
+                    <!--<img src="" class="i-img" data-src="" style="width:100%;padding-top:10px;">-->
+                    <!--<div class="default-tip">-->
+                        <!--封面图片-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="i-desc" style="padding:10px;"></div>-->
+                <!--<div class="msg-text" style="width:96%;padding:2%;border-top:1px solid #b2b8bd;position: absolute;bottom:2px;line-height:20px">-->
+                    <!--阅读全文 <span style="float:right">&gt;</span>-->
+                    <!--<div class="clearfix"></div>-->
+                <!--</div></div>-->
+        <!--</div>-->
+        <div class="msg-item-wrapper" id="appmsg" style="min-height:358px;max-height: 358px;">
+            <div id="appmsgItem1" class="">
+                <h4><div class="" style="padding:10px;padding-bottom:0px;white-space: normal;text-overflow: ellipsis;height:28px;width:370px;max-width: 370px;overflow: hidden;font-weight: normal;">标题</div></h4>
+                <div class="" style="max-height:190px;overflow: hidden;">
+                    <img src="" class="" data-src="" style="width:100%;padding-top:10px;">
+                    <div class="default-tip">
+                        封面图片
                     </div>
                 </div>
-            </div>
-            <div class="form-actions fluid">
-                <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn green">创建规则</button>
-                </div>
-            </div>
-        </form>
+                <div class="" style="padding:10px;"></div>
+                <div class="" style="width:96%;padding:2%;border-top:1px solid #b2b8bd;position: absolute;bottom:2px;line-height:20px">
+                    阅读全文 <span style="float:right">&gt;</span>
+                    <div class="clearfix"></div>
+                </div></div>
+        </div>
     </div>
 </div>
-<!-- END SAMPLE FORM PORTLET-->
-</div>
-    </div>
 <script src="/assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <script src="/assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
@@ -85,21 +140,47 @@
 <script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
 <!-- The File Upload processing plugin -->
 <script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
-<!-- The File Upload validation plugin -->
-<script src="/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+
 
 <script type="text/javascript">
-
-    $(function() {
+    $(function () {
         $('#fileupload').fileupload({
             /* ... */
+            url: '/upload',
+            maxFileSize: 5*1000*1000,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            dataType: 'json',
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator && navigator.userAgent),
+            imageMaxWidth: 720,
+            imageMaxHeight: 400,
+            imageCrop: true,
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $('#progress .bar').css(
                         'width',
                         progress + '%'
                 );
+            },
+            done: function (e, data) {
+                $.each(data.result, function (index, file) {
+                    alert(file.name);
+//                    $("#appmsgItem1 img").attr('src', file.path);
+                });
             }
+        });
+
+        $("input[name='title']").keyup(function(){
+            var title = $("input[name='title']").val();
+            if (title == '') {
+                title = '标题';
+            }
+            $("#appmsgItem1 div:first").html(title);
+        });
+
+        $("textarea[name='discription']").keyup(function(){
+            var str = $("textarea[name='discription']").val();
+            $("#appmsgItem1 div:eq(3)").html(str);
         });
     });
 

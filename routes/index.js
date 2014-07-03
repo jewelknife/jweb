@@ -1,6 +1,7 @@
 var crypto = require('crypto')
     , User = require('../lib/user.js')
-    , fs = require('fs');
+    , fs = require('fs')
+    , formidable = require('formidable');
 /*
  * GET home page.
  */
@@ -91,6 +92,73 @@ module.exports = function(app, webot){
     app.post('/new_picmsg', checkLogin);
     app.post('/new_picmsg', function(req, res) {
         res.redirect('/picmsg_list');
+    });
+
+    app.post('/upload', function (req, res) {
+        res.setHeader(
+            'Access-Control-Allow-Origin',
+            options.accessControl.allowOrigin
+        );
+        res.setHeader(
+            'Access-Control-Allow-Methods',
+            options.accessControl.allowMethods
+        );
+        res.setHeader(
+            'Access-Control-Allow-Headers',
+            options.accessControl.allowHeaders
+        );
+        var handleResult = function (result, redirect) {
+                if (redirect) {
+                    res.writeHead(302, {
+                        'Location': redirect.replace(
+                            /%s/,
+                            encodeURIComponent(JSON.stringify(result))
+                        )
+                    });
+                    res.end();
+                } else {
+                    res.writeHead(200, {
+                        'Content-Type': req.headers.accept
+                            .indexOf('application/json') !== -1 ?
+                            'application/json' : 'text/plain'
+                    });
+                    res.end(JSON.stringify(result));
+                }
+            },
+            setNoCacheHeaders = function () {
+                res.setHeader('Pragma', 'no-cache');
+                res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+                res.setHeader('Content-Disposition', 'inline; filename="files.json"');
+            },
+            handler = new UploadHandler(req, res, handleResult);
+        switch (req.method) {
+            case 'OPTIONS':
+                res.end();
+                break;
+            case 'HEAD':
+            case 'GET':
+                if (req.url === '/') {
+                    setNoCacheHeaders();
+                    if (req.method === 'GET') {
+                        handler.get();
+                    } else {
+                        res.end();
+                    }
+                } else {
+                    fileServer.serve(req, res);
+                }
+                break;
+            case 'POST':
+                setNoCacheHeaders();
+                handler.post();
+                break;
+            case 'DELETE':
+                handler.destroy();
+                break;
+            default:
+                res.statusCode = 405;
+                res.end();
+        }
     });
 
     app.get('/picmsg_list', checkLogin);

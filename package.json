@@ -12,7 +12,8 @@
         "connect-mongo": "*",
         "connect-flash": "*",
         "markdown":"*",
-        "weixin-robot":"*"
+        "weixin-robot":"*",
+        "formidable": "*"
     },
     "engines": {
         "node": "0.10.13",
