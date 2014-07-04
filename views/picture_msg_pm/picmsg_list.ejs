@@ -45,37 +45,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <% picmsgs.forEach(function(picmsg, index){ %>
-
-                    <% if (index % 6 == 0 ) { %>
-                        <div class="row">
-                        <% } %>
-
-                        <div class="col-sm-4 col-md-2">
-                            <div class="thumbnail">
-                                <h3><%= picmsg.title %></h3>
-                                <img src="<%= picmsg.picurl %>" alt="100%x200"
-                                     style="width: 100%; height: 200px; display: block;"
-                                     data-src="holder.js/100%x200">
-
-                                <div class="caption">
-                                    <p><%= picmsg.description %></p>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <% if (index % 6 == 5) { %>
-                    </div>
-                    <% } %>
-
-                    <% }); %>
-
-                    <% if (picmsgs.length % 6 != 5) { %>
-                        </div>
-                    <% } %>
-                </div>
+                <%- include picmsg_list_detail %>
             <p id="dynamic_pager_demo2">
             <ul class="bootpag pagination pagination-sm">
                 <li data-lp="1" class="prev disabled"><a href="javascript:void(0);">

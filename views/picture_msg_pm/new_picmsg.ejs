@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                <form class="form-horizontal"  method="post" role="form" enctype="multipart/form-data">
+                <form class="form-horizontal"  method="post" role="form" >
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">标题</label>
@@ -48,10 +48,29 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 control-label">分类</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="classification">
+                                    <option>美食</option>
+                                    <option>旅游</option>
+                                    <option>心情</option>
+                                    <option>家居</option>
+                                    <option>科技</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 control-label">描述</label>
 
                             <div class="col-md-9">
-                                <textarea class="form-control" name="discription" rows="3"></textarea>
+                                <textarea class="form-control" name="description" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">链接</label>
+
+                            <div class="col-md-9">
+                                <input class="form-control" name="link" placeholder="请输入消息链接.."></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -70,10 +89,17 @@
                                 尺寸建议720像素*400像素
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">详情</label>
+
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="content" rows="15"></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-actions fluid">
                         <div class="col-md-offset-3 col-md-9">
-                            <button type="submit" class="btn green">创建规则</button>
+                            <button type="submit" class="btn green">提交</button>
                         </div>
                     </div>
                 </form>
@@ -100,22 +126,6 @@
                 position: relative;
             }
         </style>
-        <!--<div class="note note-success" id="appmsg" style="">-->
-            <!--<div id="appmsgItem1" class="msg-item appmsgItem">-->
-                <!--<h4 class="msg-t"><div class="i-title" style="padding:10px;padding-bottom:0px;white-space: normal;text-overflow: ellipsis;height:1em;width:370px;max-width: 370px;overflow: hidden;">标题</div>-->
-                <!--</h4>-->
-                <!--<div class="cover" style="max-height:190px;overflow: hidden;">-->
-                    <!--<img src="" class="i-img" data-src="" style="width:100%;padding-top:10px;">-->
-                    <!--<div class="default-tip">-->
-                        <!--封面图片-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="i-desc" style="padding:10px;"></div>-->
-                <!--<div class="msg-text" style="width:96%;padding:2%;border-top:1px solid #b2b8bd;position: absolute;bottom:2px;line-height:20px">-->
-                    <!--阅读全文 <span style="float:right">&gt;</span>-->
-                    <!--<div class="clearfix"></div>-->
-                <!--</div></div>-->
-        <!--</div>-->
         <div class="msg-item-wrapper" id="appmsg" style="min-height:358px;max-height: 358px;">
             <div id="appmsgItem1" class="">
                 <h4><div class="" style="padding:10px;padding-bottom:0px;white-space: normal;text-overflow: ellipsis;height:28px;width:370px;max-width: 370px;overflow: hidden;font-weight: normal;">标题</div></h4>
@@ -125,7 +135,7 @@
                         封面图片
                     </div>
                 </div>
-                <div class="" style="padding:10px;"></div>
+                <div class="" style="padding:10px;word-wrap:break-word;text-overflow: ellipsis;height:78px;overflow: hidden;"></div>
                 <div class="" style="width:96%;padding:2%;border-top:1px solid #b2b8bd;position: absolute;bottom:2px;line-height:20px">
                     阅读全文 <span style="float:right">&gt;</span>
                     <div class="clearfix"></div>
@@ -164,8 +174,8 @@
             },
             done: function (e, data) {
                 $.each(data.result, function (index, file) {
-                    alert(file[0].name);
                     $("#appmsgItem1 img").attr('src', file[0].url);
+                    $('#fileupload').append($('<input type="hidden" name="picname" value="' + file[0].name + '" />'));
                 });
             }
         });
@@ -178,8 +188,8 @@
             $("#appmsgItem1 div:first").html(title);
         });
 
-        $("textarea[name='discription']").keyup(function(){
-            var str = $("textarea[name='discription']").val();
+        $("textarea[name='description']").keyup(function(){
+            var str = $("textarea[name='description']").val();
             $("#appmsgItem1 div:eq(3)").html(str);
         });
     });
