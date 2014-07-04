@@ -13,9 +13,8 @@
         "connect-flash": "*",
         "markdown":"*",
         "weixin-robot":"*",
-        "formidable": "*"
-    },
-    "engines": {
+        "blueimp-file-upload-expressjs":"*"
+    },"engines": {
         "node": "0.10.13",
         "npm": "1.3.2"
     }

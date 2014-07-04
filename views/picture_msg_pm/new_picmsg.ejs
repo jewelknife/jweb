@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+                <form class="form-horizontal"  method="post" role="form" enctype="multipart/form-data">
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">标题</label>
@@ -61,7 +61,7 @@
                         <span class="btn green fileinput-button">
                             <i class="fa fa-plus"></i>
                             <span>上传</span>
-                            <input id="fileupload" type="file" name="files[]" multiple="">
+                            <input id="fileupload" type="file" name="files" >
 						</span>
 
                                 <div id="progress" style="height: 18px;">
@@ -147,6 +147,7 @@
         $('#fileupload').fileupload({
             /* ... */
             url: '/upload',
+            dataType: 'json',
             maxFileSize: 5*1000*1000,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
             dataType: 'json',
@@ -154,7 +155,6 @@
                     .test(window.navigator && navigator.userAgent),
             imageMaxWidth: 720,
             imageMaxHeight: 400,
-            imageCrop: true,
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $('#progress .bar').css(
@@ -164,8 +164,8 @@
             },
             done: function (e, data) {
                 $.each(data.result, function (index, file) {
-                    alert(file.name);
-//                    $("#appmsgItem1 img").attr('src', file.path);
+                    alert(file[0].name);
+                    $("#appmsgItem1 img").attr('src', file[0].url);
                 });
             }
         });

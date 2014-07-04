@@ -26,21 +26,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-//app.use(function (req, res, next) {
-//  getRawBody(req, {
-//    length: req.headers['content-length'],
-//    limit: '600mb',
-//    encoding: 'utf8'
-//  }, function (err, string) {
-//    if (err)
-//      return next(err)
-//
-//    req.text = string
-//    next()
-//  })
-//})
-//app.use(express.urlencoded({limit: '300mb'}));
-app.use(express.bodyParser({ keepExtensions: true}));
+//app.use(express.bodyParser({ keepExtensions: true, uploadDir: './public/temp', limit: '5mb'}));
 app.use(express.cookieParser());
 app.use(express.session({
     secret: settings.cookieSecret,

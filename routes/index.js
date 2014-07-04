@@ -1,10 +1,44 @@
 var crypto = require('crypto')
     , User = require('../lib/user.js')
-    , fs = require('fs')
-    , formidable = require('formidable');
+    , fs = require('fs');
 /*
  * GET home page.
  */
+
+var options = {
+    tmpDir:  __dirname + '/../public/uploaded/tmp',
+    uploadDir: __dirname + '/../public/uploaded/files',
+    uploadUrl:  '/uploaded/files/',
+    maxPostSize: 5000000,
+    minFileSize:  1,
+    maxFileSize:  5000000,
+    acceptFileTypes: /\.(gif|jpe?g|png)/i,
+    // Files not matched by this regular expression force a download dialog,
+    // to prevent executing any scripts in the context of the service domain:
+    inlineFileTypes:  /\.(gif|jpe?g|png)/i,
+    imageTypes:  /\.(gif|jpe?g|png)/i,
+    imageVersions: {
+        width:  720,
+        height: 400
+    },
+    accessControl: {
+        allowOrigin: '*',
+        allowMethods: 'OPTIONS, HEAD, GET, POST, PUT, DELETE',
+        allowHeaders: 'Content-Type, Content-Range, Content-Disposition'
+    }
+//    storage : {
+//        type : 'aws',
+//        aws : {
+//            accessKeyId :  'xxxxxxxxxxxxxxxxx',
+//            secretAccessKey : 'xxxxxxxxxxxxxxxxx',
+//            region : 'us-east-1',//make sure you know the region, else leave this option out
+//            bucketName : 'xxxxxxxxxxxxxxxxx'
+//        }
+//    }
+};
+
+// init the uploader
+var uploader = require('blueimp-file-upload-expressjs')(options);
 
 module.exports = function(app, webot){
 
@@ -94,71 +128,23 @@ module.exports = function(app, webot){
         res.redirect('/picmsg_list');
     });
 
-    app.post('/upload', function (req, res) {
-        res.setHeader(
-            'Access-Control-Allow-Origin',
-            options.accessControl.allowOrigin
-        );
-        res.setHeader(
-            'Access-Control-Allow-Methods',
-            options.accessControl.allowMethods
-        );
-        res.setHeader(
-            'Access-Control-Allow-Headers',
-            options.accessControl.allowHeaders
-        );
-        var handleResult = function (result, redirect) {
-                if (redirect) {
-                    res.writeHead(302, {
-                        'Location': redirect.replace(
-                            /%s/,
-                            encodeURIComponent(JSON.stringify(result))
-                        )
-                    });
-                    res.end();
-                } else {
-                    res.writeHead(200, {
-                        'Content-Type': req.headers.accept
-                            .indexOf('application/json') !== -1 ?
-                            'application/json' : 'text/plain'
-                    });
-                    res.end(JSON.stringify(result));
-                }
-            },
-            setNoCacheHeaders = function () {
-                res.setHeader('Pragma', 'no-cache');
-                res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-                res.setHeader('Content-Disposition', 'inline; filename="files.json"');
-            },
-            handler = new UploadHandler(req, res, handleResult);
-        switch (req.method) {
-            case 'OPTIONS':
-                res.end();
-                break;
-            case 'HEAD':
-            case 'GET':
-                if (req.url === '/') {
-                    setNoCacheHeaders();
-                    if (req.method === 'GET') {
-                        handler.get();
-                    } else {
-                        res.end();
-                    }
-                } else {
-                    fileServer.serve(req, res);
-                }
-                break;
-            case 'POST':
-                setNoCacheHeaders();
-                handler.post();
-                break;
-            case 'DELETE':
-                handler.destroy();
-                break;
-            default:
-                res.statusCode = 405;
-                res.end();
-        }
+    app.get('/upload', function(req, res) {
+        uploader.get(req, res, function (obj) {
+            res.send(JSON.stringify(obj));
+        });
+    });
+
+    app.post('/upload', function(req, res) {
+        uploader.post(req, res, function (obj) {
+            res.send(JSON.stringify(obj));
+        });
+    });
+
+    // the path SHOULD match options.uploadUrl
+    app.delete('/uploaded/files/:name', function(req, res) {
+        uploader.delete(req, res, function (obj) {
+            res.send(JSON.stringify(obj));
+        });
     });
 
     app.get('/picmsg_list', checkLogin);
