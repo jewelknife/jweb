@@ -175,7 +175,8 @@
             done: function (e, data) {
                 $.each(data.result, function (index, file) {
                     $("#appmsgItem1 img").attr('src', file[0].url);
-                    $('#fileupload').append($('<input type="hidden" name="picname" value="' + file[0].name + '" />'));
+                    $('input[name="picname"]').remove();
+                    $('#fileupload').after($('<input type="hidden" name="picname" value="' + file[0].name + '" />'));
                 });
             }
         });

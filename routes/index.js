@@ -185,15 +185,29 @@ module.exports = function(app, webot){
 
     app.get('/picmsg_list', checkLogin);
     app.get('/picmsg_list', function(req, res) {
-        var page = req.body.page ? req.body.page : 1;
-        var offset = req.body.offset ? req.body.offset : 12;
+        var page = req.query.page ? req.query.page : 1;
+        var offset = req.query.offset ? req.query.offset : 12;
+        var showType = req.query.type ? req.query.type : "0";
+        switch (showType) {
+            case "0":
+                renderEjs =  "picture_msg_pm/picmsg_list";
+                break;
+            case "1":
+                renderEjs =  "picture_msg_pm/picmsg_list_detail";
+                break;
+            case "2":
+                renderEjs =  "picture_msg_pm/picmsg_list_modal";
+                break;
+            default:
+                renderEjs =  "picture_msg_pm/picmsg_list";
+        }
         Post.getPosts(req.session.user.username, null, null, null, null, null, page, offset, function(err, docs, total){
             if (err) {
                 req.flash('error', err);
                 return res.redirect("/");
             }
             console.log(docs);
-            res.render('picture_msg_pm/picmsg_list', {
+            res.render(renderEjs, {
                 title: '图文消息列表',
                 picmsgs: docs,
                 total: total,

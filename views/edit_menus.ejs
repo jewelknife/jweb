@@ -66,9 +66,17 @@
                                 <button type="button" class="btn red addSubBtn">
                                     <span class="glyphicon glyphicon-list-alt"></span> 添加子菜单
                                 </button>
-                                <button type="button" class="btn grey select-reply-button open-button2 replyBtn" data-open=".reply-panel" data-model data-message>
-                                    选择回复方式
-                                </button>
+                                <!--<button type="button" class="btn grey select-reply-button open-button2 replyBtn" data-open=".reply-panel" data-model data-message>-->
+                                    <!--选择回复方式-->
+                                <!--</button>-->
+                                <a href="#text-content" data-toggle="modal" class="btn blue">文字 <i
+                                            class="fa fa-pencil-square"></i></a>
+                                <!--<a href="#" class="btn red">图片 <i class="fa fa-pencil"></i></a>-->
+                                <!--<a href="#" class="btn purple">语音 <i class="fa fa-pencil"></i></a>-->
+                                <!--<a href="#" class="btn dark">视频 <i class="fa fa-pencil"></i></a>-->
+                                <a class="btn yellow" data-toggle="modal" href="/picmsg_list?type=2"
+                                   data-target="#ajax">图文 <i class="fa fa-picture-o"></i></a>
+
                             </div>
                         </div>
                         <!-- end top m -->
@@ -161,4 +169,6 @@
         Menus.initEditMenus();
     });
 </script>
+
+<%- include common/msg_choose_modal %>
 <%- include footer %>
