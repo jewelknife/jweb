@@ -13,6 +13,21 @@
         opacity: .6;
         z-index: 1;
     }
+    .icon_card_selected {
+        background: url("/assets/img/base_z1f0ee8.png") 0 -3643px no-repeat;
+        width: 46px;
+        height: 46px;
+        vertical-align: middle;
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -23px;
+        margin-left: -23px;
+        line-height: 999em;
+        overflow: hidden;
+        z-index: 1;
+    }
 </style>
 
 <div class="modal-dialog">
@@ -47,6 +62,7 @@
                                         </p>
                                     </div>
                                     <div class="picmsg_mask">
+                                        <i class="icon_card_selected">已选择</i>
                                     </div>
                                 </div>
 
@@ -73,7 +89,7 @@
     <!-- end modal-body -->
     <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn blue">确定</button>
+        <button type="button" class="btn blue picmsg_btn_sure" data-dismiss="modal">确定</button>
     </div>
 </div>
 <!-- /.modal-content -->
@@ -83,14 +99,31 @@
 <script>
     $(".modal .table-responsive .thumbnail").hover(
             function () {
-//                $(this).addClass("hover");cursor: pointer;
                 $(this).css('cursor','pointer');
                 $(this).find('.picmsg_mask').show();
             },
             function () {
-//                $(this).removeClass("hover");
                 $(this).css('cursor','default');
-                $(this).find('.picmsg_mask').hide();
+                if (!$(this).find('.picmsg_mask').hasClass('selected')) {
+                    $(this).find('.picmsg_mask').hide();
+                }
             }
     );
+    $(".modal .table-responsive .thumbnail").click(
+            function () {
+                $(".modal .table-responsive .selected .icon_card_selected").hide();
+                $(".modal .table-responsive .selected").hide().removeClass('selected');
+                $(this).find('.picmsg_mask').addClass('selected');
+                $(this).find('.picmsg_mask').show();
+                $(this).find('.picmsg_mask .icon_card_selected').show();
+            }
+    );
+    $(".picmsg_btn_sure").on("click", function() {
+        if ('#response_show') {
+            var newpic = $('.modal .table-responsive .thumbnail .selected').parent('.thumbnail').clone();
+            newpic.find('.selected').hide();
+            $('#response_show').html('');
+            $('#response_show').append(newpic);
+        }
+    });
 </script>
